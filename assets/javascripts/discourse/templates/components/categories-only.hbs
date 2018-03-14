@@ -1,28 +1,4 @@
 {{#if categories}}
-  <table class="category-list">
-    <tbody aria-labelledby="categories-only-category">
-      <tr data-category-id="-1" class="has-description no-logo">
-        <td class="category">
-          <div>
-            <h3 class="ember-view">
-              <a href="/discord" class="category-title-link">
-                <div class="category-text-title">
-                  <span class="category-name">
-                    {{i18n 'pseudo_forums.discord.title'}}
-                  </span>
-                </div>
-              </a>
-            </h3>
-            <div class="category-description">
-              {{i18n 'pseudo_forums.discord.description'}}
-            </div>
-            <div class="clearfix"></div>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
   <table class="category-list {{if showTopics 'with-topics'}}">
     <thead>
       <tr>
