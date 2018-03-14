@@ -30,9 +30,9 @@ export default createWidget('poster-name', {
 
   // TODO: Allow extensibility
   posterGlyph(attrs) {
-    if (attrs.moderator) {
-      return iconNode('gavel', { title: I18n.t('user.moderator_tooltip') });
-    }
+    // if (attrs.moderator) {
+    //   return iconNode('shield', { title: I18n.t('user.moderator_tooltip') });
+    // }
   },
 
   userLink(attrs, text) {
