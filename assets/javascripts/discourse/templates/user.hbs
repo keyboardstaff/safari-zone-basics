@@ -1,55 +1,159 @@
-<div class="alert alert-info"><strong>Profiles are being redesigned!</strong> The default discourse implementation is ugly and hard to work with so I'm just gonna do a bunch of it from scratch. Sorry for the inconvenience if things shift around until then.<br>- Dak</div>
 <div class="container {{if viewingSelf 'viewing-self'}}">
   {{#d-section class="user-main"}}
 
-    <section class="custom-profile-header">
-      <div class="avatar-container">
-        <div class='user-profile-avatar'>
-          {{bound-avatar model "huge"}}
-          {{#if model.primary_group_name}}
+    <section class="{{if collapsedInfo 'collapsed-info'}} about {{if hasProfileBackground 'has-background' 'no-background'}}"  style={{model.profileBackground}}>
+    {{#unless collapsedInfo}}
+      {{#if showStaffCounters}}
+        <div class='staff-counters'>
+          {{#if model.number_of_flags_given}}
+            <div><span class="helpful-flags">{{model.number_of_flags_given}}</span>{{i18n 'user.staff_counters.flags_given'}}</div>
+          {{/if}}
+          {{#if model.number_of_flagged_posts}}
+            <div>
+              {{#link-to 'user.flaggedPosts' model}}
+                <span class="flagged-posts">{{model.number_of_flagged_posts}}</span>{{i18n 'user.staff_counters.flagged_posts'}}
+              {{/link-to}}
+            </div>
+          {{/if}}
+          {{#if model.number_of_deleted_posts}}
+            <div>
+              {{#link-to 'user.deletedPosts' model}}
+                <span class="deleted-posts">{{model.number_of_deleted_posts}}</span>{{i18n 'user.staff_counters.deleted_posts'}}
+              {{/link-to}}
+            </div>
+          {{/if}}
+          {{#if model.number_of_suspensions}}
+            <div>
+              <a {{action "showSuspensions"}}>
+                <span class="suspensions">{{model.number_of_suspensions}}</span>{{i18n 'user.staff_counters.suspensions'}}
+              </a>
+            </div>
+          {{/if}}
+          {{#if model.warnings_received_count}}
+            <div><span class="warnings-received">{{model.warnings_received_count}}</span>{{i18n 'user.staff_counters.warnings_received'}}</div>
+          {{/if}}
+        </div>
+      {{/if}}
+    {{/unless}}
+
+      <div class='profile-image'></div>
+      <div class='details'>
+        <div class='primary'>
+          <div class='user-profile-avatar'>
+            {{bound-avatar model "huge"}}
+            {{#if model.primary_group_name}}
               {{avatar-flair
                 flairURL=model.primary_group_flair_url
                 flairBgColor=model.primary_group_flair_bg_color
                 flairColor=model.primary_group_flair_color
                 groupName=model.primary_group_name}}
-          {{/if}}
-          {{plugin-outlet name="user-profile-avatar-flair" args=(hash model=model) tagName='div'}}
-        </div>
-      </div>
-      <div class="details-container">
-        <h1 class="{{if nameFirst "full-name" "username"}}">{{if nameFirst model.name (format-username model.username)}} {{user-status model currentUser=currentUser}}</h1>
-        <h2 class="{{if nameFirst "username" "full-name"}}">{{#if nameFirst}}{{model.username}}{{else}}{{model.name}}{{/if}}</h2>
-        <div class='bio'>
-          {{#if model.isSuspended}}
-            <div class='suspended'>
-              {{d-icon "ban"}}
-              <b>
-                {{#if model.suspendedForever}}
-                  {{i18n 'user.suspended_permanently'}}
-                {{else}}
-                  {{i18n 'user.suspended_notice' date=model.suspendedTillDate}}
-                {{/if}}
-              </b><br>
-              {{#if model.suspend_reason}}
-                <b>{{i18n 'user.suspended_reason'}}</b> {{model.suspend_reason}}
+            {{/if}}
+            {{plugin-outlet name="user-profile-avatar-flair" args=(hash model=model) tagName='div'}}
+          </div>
+          <section class='controls'>
+            <ul>
+              {{#if model.can_send_private_message_to_user}}
+              <li>
+                <a class='btn btn-primary compose-pm' {{action "composePrivateMessage" model}}>
+                  {{d-icon "envelope"}}
+                  {{i18n 'user.private_message'}}
+                </a>
+              </li>
+              {{/if}}
+              {{#if currentUser.staff}}
+                <li><a href={{model.adminPath}} class="btn">{{d-icon "wrench"}}{{i18n 'admin.user.show_admin_profile'}}</a></li>
+              {{/if}}
+              {{plugin-outlet name="user-profile-controls"
+                              connectorTagName="li"
+                              args=(hash model=model)}}
+
+              {{#if collapsedInfo}}
+              {{#if viewingSelf}}
+              <li><a {{action "expandProfile"}} href class="btn">{{d-icon "angle-double-down"}}{{i18n 'user.expand_profile'}}</a></li>
+              {{/if}}
+              {{/if}}
+
+            </ul>
+          </section>
+
+          <div class="primary-textual">
+            <h1 class="{{if nameFirst "full-name" "username"}}">{{if nameFirst model.name (format-username model.username)}} {{user-status model currentUser=currentUser}}</h1>
+            <h2 class="{{if nameFirst "username" "full-name"}}">{{#if nameFirst}}{{model.username}}{{else}}{{model.name}}{{/if}}</h2>
+            {{#if model.title}}
+              <h3>{{model.title}}</h3>
+            {{/if}}
+            {{plugin-outlet name="user-post-names" args=(hash model=model)}}
+            <h3 class="location-and-website">
+            {{#if model.location}}{{d-icon "map-marker"}} {{model.location}}{{/if}}
+            {{#if model.website_name}}
+              {{d-icon "globe"}}
+              {{#if linkWebsite}}
+                <a href={{model.website}} rel={{unless removeNoFollow 'nofollow noopener'}} target="_blank">{{model.website_name}}</a>
+              {{else}}
+                <span title={{model.website}}>{{model.website_name}}</span>
+              {{/if}}
+            {{/if}}
+            {{plugin-outlet name="user-location-and-website" args=(hash model=model)}}
+            </h3>
+
+            <div class='bio'>
+              {{#if model.isSuspended}}
+                <div class='suspended'>
+                  {{d-icon "ban"}}
+                  <b>
+                    {{#if model.suspendedForever}}
+                      {{i18n 'user.suspended_permanently'}}
+                    {{else}}
+                      {{i18n 'user.suspended_notice' date=model.suspendedTillDate}}
+                    {{/if}}
+                  </b><br>
+                  {{#if model.suspend_reason}}
+                    <b>{{i18n 'user.suspended_reason'}}</b> {{model.suspend_reason}}
+                  {{/if}}
+                </div>
+              {{/if}}
+              {{#if isNotSuspendedOrIsStaff}}
+                {{{model.bio_cooked}}}
               {{/if}}
             </div>
-          {{/if}}
-          {{#if isNotSuspendedOrIsStaff}}
-            {{{model.bio_cooked}}}
-          {{/if}}
-        </div>
-      </div>
-    </section>
 
-    <section class="staff-stickers">
-      {{#each model.displayGroups as |group|}}
-        {{#if group.flair_bg_color}}
-          <span class="profile-staff-sticker" style="background-color: #{{group.flair_bg_color}}; color: #{{group.flair_color}};">
-            {{#link-to 'group' group.name class="group-link"}}{{group.full_name}}{{/link-to}}
-          </span>
-        {{/if}}
-      {{/each}}
+            {{#if publicUserFields}}
+              <div class="public-user-fields">
+                {{#each publicUserFields as |uf|}}
+                  {{#if uf.value}}
+                    <div class="public-user-field {{uf.field.dasherized_name}}">
+                      <span class="user-field-name">{{uf.field.name}}</span>:
+                      <span class="user-field-value">{{uf.value}}</span>
+                    </div>
+                  {{/if}}
+                {{/each}}
+
+                {{plugin-outlet name="user-profile-public-fields"
+                                args=(hash publicUserFields=publicUserFields
+                                      model=model)}}
+              </div>
+            {{/if}}
+
+            {{plugin-outlet name="user-profile-primary" args=(hash model=model)}}
+          </div>
+        </div>
+        <div style='clear: both'></div>
+      </div>
+
+      {{#unless collapsedInfo}}
+      <div class='secondary'>
+        <section class="staff-stickers">
+          {{#each model.displayGroups as |group|}}
+            {{#if group.flair_bg_color}}
+              <span class="profile-staff-sticker" style="background-color: #{{group.flair_bg_color}}; color: #{{group.flair_color}};">
+                {{#link-to 'group' group.name class="group-link"}}{{group.full_name}}{{/link-to}}
+              </span>
+            {{/if}}
+          {{/each}}
+        </section>
+        {{plugin-outlet name="user-profile-secondary" args=(hash model=model)}}
+      </div>
+      {{/unless}}
     </section>
 
     {{#mobile-nav class='main-nav' desktopClass="nav nav-pills user-nav" currentPath=currentPath}}
