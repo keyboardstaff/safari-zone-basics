@@ -36,7 +36,7 @@
           <h3>{{d-icon "users"}} {{i18n 'about.our_moderators'}}</h3>
 
           <div class='users'>
-            {{#each model.moderators as |m|}}
+            {{#each model.users as |m|}}
               {{user-info user=m}}
             {{/each}}
           </div>
