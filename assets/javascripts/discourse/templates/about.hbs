@@ -1,0 +1,56 @@
+{{#d-section pageClass="about"}}
+  <div class='container'>
+    <div class='contents clearfix body-page'>
+
+      <ul class="nav-pills">
+        <li class="nav-item-about">{{#link-to 'about' class="active"}}{{i18n 'about.simple_title'}}{{/link-to}}</li>
+        {{#if faqOverriden}}
+          <li class="nav-item-guidelines">{{#link-to 'guidelines'}}{{i18n 'guidelines'}}{{/link-to}}</li>
+          <li class="nav-item-faq">{{#link-to 'faq'}}{{i18n 'faq'}}{{/link-to}}</li>
+        {{else}}
+          <li class="nav-item-faq">{{#link-to 'faq'}}{{i18n 'faq'}}{{/link-to}}</li>
+        {{/if}}
+        <li class="nav-item-tos">{{#link-to 'tos'}}{{i18n 'terms_of_service'}}{{/link-to}}</li>
+        <li class="nav-item-privacy">{{#link-to 'privacy'}}{{i18n 'privacy'}}{{/link-to}}</li>
+      </ul>
+
+      <section class='about description'>
+        <h2>{{i18n 'about.title' title=model.title}}</h2>
+        <p>{{model.description}}</p>
+      </section>
+
+      {{#if model.admins}}
+        <section class='about admins'>
+          <h3>{{d-icon "users"}} {{i18n 'about.our_admins'}}</h3>
+
+          {{#each model.admins as |a|}}
+            {{user-info user=a}}
+          {{/each}}
+          <div class='clearfix'></div>
+
+        </section>
+      {{/if}}
+
+      {{#if model.moderators}}
+        <section class='about moderators'>
+          <h3>{{d-icon "users"}} {{i18n 'about.our_moderators'}}</h3>
+
+          <div class='users'>
+            {{#each model.moderators as |m|}}
+              {{user-info user=m}}
+            {{/each}}
+          </div>
+          <div class='clearfix'></div>
+        </section>
+      {{/if}}
+
+      {{#if contactInfo}}
+        <section class='about contact'>
+            <h3>{{d-icon "envelope-o"}} {{i18n 'about.contact'}}</h3>
+            <p>{{{contactInfo}}}</p>
+        </section>
+      {{/if}}
+
+    </div>
+  </div>
+{{/d-section}}
