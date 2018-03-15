@@ -29,7 +29,6 @@
     <thead>
       <tr>
         <th class="category"><span aria-role="heading" aria-level="2" id="categories-only-category">{{i18n 'categories.category'}}</span></th>
-        <th class="topics">{{i18n 'categories.topics'}}</th>
         {{#if showTopics}}
           <th class="latest">{{i18n 'categories.latest'}}</th>
         {{/if}}
@@ -57,10 +56,6 @@
                 {{/each}}
               </div>
             {{/if}}
-          </td>
-          <td class="topics">
-            <div title={{c.statTitle}}>{{{c.stat}}}</div>
-            {{category-unread category=c tagName="div" class="unread-new"}}
           </td>
           {{#if showTopics}}
             <td class="latest">
