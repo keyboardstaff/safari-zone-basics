@@ -36,13 +36,17 @@
           <h3>{{d-icon "users"}} {{i18n 'about.our_moderators'}}</h3>
 
           <div class='users'>
-            {{#each model.users as |m|}}
+            {{#each model.moderators as |m|}}
               {{user-info user=m}}
             {{/each}}
           </div>
           <div class='clearfix'></div>
         </section>
       {{/if}}
+
+      <script language="javascript" type="text/javascript">
+        console.log({{model}});
+      </script>
 
       {{#if contactInfo}}
         <section class='about contact'>
