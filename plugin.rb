@@ -17,10 +17,10 @@ after_initialize do
       "Zine_Staff"
     ]
     def moderators
-      STAFF_GROUPS.map do |group_name|
+      @moderators = STAFF_GROUPS.map do |group_name|
         Group.find_by(name: group_name)
       end
     end
-    
+
   end
 end
