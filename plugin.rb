@@ -41,4 +41,8 @@ after_initialize do
         .order(:username_lower)
     end
   end
+
+  AboutSerializer.class_eval do
+    has_many :developers, serializer: UserNameSerializer, embed: :objects
+  end
 end
