@@ -19,6 +19,12 @@
         <p>{{model.description}}</p>
       </section>
 
+      {{#if model.groups}}
+        {{#each model.groups as |g|}}
+          {{g.name}}
+        {{/each}}
+      {{/if}}
+
       {{#if model.admins}}
         <section class='about admins'>
           <h3>{{d-icon "users"}} {{i18n 'about.our_admins'}}</h3>

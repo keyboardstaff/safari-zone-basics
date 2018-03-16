@@ -6,8 +6,21 @@
 
 after_initialize do
   About.class_eval do
-    def moderators
-      @moderators = User.all
+    attr_accessor :groups
+
+    STAFF_GROUPS = [ # todo make this IDs
+      "Higher_Staff",
+      "SZ_Moderators",
+      "Battle_Server_Staff",
+      "Development_Staff",
+      "Discord_Staff",
+      "Social_Birbs",
+      "Zine_Staff"
+    ]
+    def groups
+      @groups ||= STAFF_GROUPS.map do |group_name|
+        Group.find_by(name: group_name)
+      end
     end
   end
 end
