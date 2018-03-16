@@ -20,6 +20,6 @@ after_initialize do
   end
 
   AboutSerializer.class_eval do
-    has_many :groups, serializer: UserNameSerializer, embed: :objects
+    has_many :groups, serializer: BasicGroupSerializer, embed: :objects
   end
 end
