@@ -21,8 +21,8 @@
 
       {{#if model.groups}}
         {{#each model.groups as |group|}}
-          <section class='about admins'>
-            <h3>{{d-icon group.flair_url}} {{group.name}}</h3>
+          <section class='about {{group.name}}'>
+            <h3><i class='fa fa-{{group.flair_url}}'></i> {{group.full_name}}</h3>
             {{#each group.users as |u|}}
               {{user-info user=u}}
             {{/each}}
