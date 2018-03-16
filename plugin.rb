@@ -7,17 +7,18 @@
 
 #@HACK clean this up and DRY up code
 after_initialize do
-  STAFF_GROUPS = [
-    # exclude admins and mods bc they're already defined
-    :bss,
-    :developers,
-    :discord_staff,
-    :social_media,
-    :zine_staff
-  ]
-
   About.class_eval do
-    attr_accessor *::STAFF_GROUPS
+
+    STAFF_GROUPS = [
+      # exclude admins and mods bc they're already defined
+      :bss,
+      :developers,
+      :discord_staff,
+      :social_media,
+      :zine_staff
+    ]
+
+    attr_accessor *STAFF_GROUPS
 
     def admins # actually hstaff
       @admins = find_group(55)
@@ -57,7 +58,16 @@ after_initialize do
   end
 
   AboutSerializer.class_eval do
-    ::STAFF_GROUPS.each do |group|
+    STAFF_GROUPS = [
+      # exclude admins and mods bc they're already defined
+      :bss,
+      :developers,
+      :discord_staff,
+      :social_media,
+      :zine_staff
+    ]
+
+    STAFF_GROUPS.each do |group|
       has_many group, serializer: UserNameSerializer, embed: :objects
     end
   end
