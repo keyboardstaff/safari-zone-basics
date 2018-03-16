@@ -19,11 +19,9 @@
         <p>{{model.description}}</p>
       </section>
 
-      {{#if model.groups}}
-        {{#each model.groups as |g|}}
-          {{g.name}}
-        {{/each}}
-      {{/if}}
+      {{#each model.groups as |g|}}
+        1
+      {{/each}}
 
       {{#if model.admins}}
         <section class='about admins'>
