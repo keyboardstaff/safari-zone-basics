@@ -17,7 +17,6 @@ after_initialize do
   ]
 
   About.class_eval do
-
     attr_accessor *::STAFF_GROUPS
 
     def admins # actually hstaff
