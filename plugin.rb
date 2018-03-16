@@ -7,7 +7,6 @@
 after_initialize do
   About.class_eval do
     attr_accessor :groups
-    attr_accessor :admins_and_moderators
 
     STAFF_GROUPS = [ # todo make this IDs
       "Higher_Staff",
@@ -24,8 +23,8 @@ after_initialize do
       end
     end
 
-    def admins_and_moderators
-      @admins_and_moderators ||= User.where(admin: true, moderator: true)
+    def admins
+      User.where(admin: false, moderator: false)
     end
   end
 end
