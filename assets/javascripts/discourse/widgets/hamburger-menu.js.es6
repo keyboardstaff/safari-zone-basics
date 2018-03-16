@@ -177,7 +177,7 @@ export default createWidget('hamburger-menu', {
 
     results.push(this.attach('menu-links', { contents: () => this.generalLinks() }));
     // results.push(this.listCategories());
-    results.push(h('hr'));
+    // results.push(h('hr'));
     results.push(this.attach('menu-links', { omitRule: true, contents: () => this.footerLinks(prioritizeFaq, faqUrl) }));
 
     return results;
