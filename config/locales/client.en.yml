@@ -1,8 +1,11 @@
 en:
   js:
     about:
-      our_bss: 'Safari Zone Battle Server Staff'
-      our_developers: 'Safari Zone Developers'
+      our_bss: 'Battle Server Staff'
+      our_developers: 'Developers'
+      our_discord_staff: 'Discord Staff'
+      our_social_media: 'Social Media Team'
+      ourr_zine_staff: 'Zine Staff'
     pseudo_categories:
       discord:
         title: 'Safari Zone Discord'

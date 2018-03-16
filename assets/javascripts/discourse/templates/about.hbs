@@ -19,22 +19,94 @@
         <p>{{model.description}}</p>
       </section>
 
-      {{#if model.groups}}
-        {{#each model.groups as |group|}}
-          <section class='about {{group.name}}'>
-            <h3>
-              <span style="font-style: italic; color: #{{group.flair_bg_color}}">
-                <i class='fa {{group.flair_url}}'></i> 
-                {{group.user_count}}
-              </span>
-              {{group.full_name}}
-            </h3>
-            {{#each group.users as |u|}}
-              {{user-info user=u}}
+      {{#if model.admins}}
+        <section class='about'>
+          <h3>{{d-icon "star"}} {{i18n 'about.our_admins'}}</h3>
+
+          {{#each model.admins as |a|}}
+            {{user-info user=a}}
+          {{/each}}
+          <div class='clearfix'></div>
+
+        </section>
+      {{/if}}
+
+      {{#if model.moderators}}
+        <section class='about'>
+          <h3>{{d-icon "gavel"}} {{i18n 'about.our_moderators'}}</h3>
+
+          <div class='users'>
+            {{#each model.moderators as |m|}}
+              {{user-info user=m}}
             {{/each}}
-            <div class='clearfix'></div>
-          </section>
-        {{/each}}
+          </div>
+          <div class='clearfix'></div>
+        </section>
+      {{/if}}
+
+      {{#if model.bss}}
+        <section class='about'>
+          <h3>{{d-icon "bolt"}} {{i18n 'about.our_bss'}}</h3>
+
+          <div class='users'>
+            {{#each model.bss as |b|}}
+              {{user-info user=b}}
+            {{/each}}
+          </div>
+          <div class='clearfix'></div>
+        </section>
+      {{/if}}
+
+      {{#if model.developers}}
+        <section class='about'>
+          <h3>{{d-icon "code"}} {{i18n 'about.our_developers'}}</h3>
+
+          <div class='users'>
+            {{#each model.developers as |d|}}
+              {{user-info user=d}}
+            {{/each}}
+          </div>
+          <div class='clearfix'></div>
+        </section>
+      {{/if}}
+
+      {{#if model.discord_staff}}
+        <section class='about'>
+          <h3>{{d-icon "comments"}} {{i18n 'about.our_discord_staff'}}</h3>
+
+          <div class='users'>
+            {{#each model.discord_staff as |d|}}
+              {{user-info user=d}}
+            {{/each}}
+          </div>
+          <div class='clearfix'></div>
+        </section>
+      {{/if}}
+
+      {{#if model.social_media}}
+        <section class='about'>
+          <h3>{{d-icon "microphone"}} {{i18n 'about.our_social_media'}}</h3>
+
+          <div class='users'>
+            {{#each model.social_media as |s|}}
+              {{user-info user=s}}
+            {{/each}}
+          </div>
+          <div class='clearfix'></div>
+        </section>
+      {{/if}}
+
+      {{#if model.zine_staff}}
+        <section class='about'>
+          <h3>{{d-icon "pencil"}} {{i18n 'about.our_zine_staff'}}</h3>
+
+          <div class='users'>
+            {{#each model.zine_staff as |z|}}
+              {{user-info user=z}}
+            {{/each}}
+          </div>
+          <div class='clearfix'></div>
+        </section>
       {{/if}}
 
       {{#if contactInfo}}

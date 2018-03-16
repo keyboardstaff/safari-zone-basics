@@ -5,22 +5,70 @@
 # url: https://github.com/tipsypastels/safari-zone-basics
 
 
-#@HACK there has to be a better way to do it than this shitty metaprogramming
+#@HACK clean this up and DRY up code
 after_initialize do
   About.class_eval do
-    Group.all.select { |g| g.custom_fields['display_on_staff'] == 't' }.each do |g|
-      define_method(g.name) { g.members }
-      define_method(g.name + "_color") { g.flair_bg_color }
-      define_method(g.name + "_name") { g.name }
-      define_method(g.name + "_icon") { g.flair_url }
-      define_method(g.name + "_count") { g.users.length }
+
+    STAFF_GROUPS = [
+      # exclude admins and mods bc they're already defined
+      :bss,
+      :developers,
+      :discord_staff,
+      :social_media,
+      :zine_staff
+    ]
+
+    attr_accessor *STAFF_GROUPS
+
+    def admins # actually hstaff
+      @admins = find_group(55)
+    end
+
+    def moderators
+      @moderators = find_group(44)
+    end
+
+    def bss
+      @bss = find_group(53)
+    end
+
+    def developers
+      @developers = find_group(47)
+    end
+
+    def discord_staff
+      @discord_staff = find_group(45)
+    end
+
+    def social_media
+      @social_media = find_group(51)
+    end
+
+    def zine_staff
+      @zine_staff = find_group(49)
+    end
+
+    private
+
+    def find_group(id)
+      Group.find(id).users
+        .human_users
+        .order(:username_lower)
     end
   end
 
   AboutSerializer.class_eval do
-    Group.all.select { |g| g.custom_fields['display_on_staff'] == 't' }.each do |g|
-      has_many g.name.to_sym, serializer: UserNameSerializer, embed: :objects
-      has_one (g.name + "_name").to_sym, embed: :objects
+    STAFF_GROUPS = [
+      # exclude admins and mods bc they're already defined
+      :bss,
+      :developers,
+      :discord_staff,
+      :social_media,
+      :zine_staff
+    ]
+
+    STAFF_GROUPS.each do |group|
+      has_many group, serializer: UserNameSerializer, embed: :objects
     end
   end
 end
