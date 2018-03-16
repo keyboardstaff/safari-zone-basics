@@ -24,9 +24,10 @@
           <section class='about {{group.name}}'>
             <h3>
               <span style="font-style: italic; color: #{{group.flair_bg_color}}">
+                <i class='fa {{group.flair_url}}'></i> 
                 {{group.user_count}}
               </span>
-              <i class='fa {{group.flair_url}}'></i> {{group.full_name}}
+              {{group.full_name}}
             </h3>
             {{#each group.users as |u|}}
               {{user-info user=u}}
