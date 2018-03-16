@@ -5,21 +5,22 @@
 # url: https://github.com/tipsypastels/safari-zone-basics
 
 
-#@HACK clean this up and DRY up code
+#@HACK there has to be a better way to do it than this shitty metaprogramming
 after_initialize do
   About.class_eval do
-    attr_accessor :groups
-    # inefficient but probably okay as long as there aren't that many groups
-    def groups
-      @groups = Group.all.select do |group|
-        group.custom_fields['display_on_staff'] == 't'
-      end.sort do |g1, g2| 
-        g1.custom_fields['staff_order'] <=> g2.custom_fields['staff_order']
-      end
+    Group.all.select { |g| g.custom_fields['display_on_staff'] == 't' }.each do |g|
+      define_method(g.name) { g.members }
+      define_method(g.name + "_color") { g.flair_bg_color }
+      define_method(g.name + "_name") { g.name }
+      define_method(g.name + "_icon") { g.flair_url }
+      define_method(g.name + "_count") { g.users.length }
     end
   end
 
   AboutSerializer.class_eval do
-    has_many :groups, serializer: BasicGroupSerializer, embed: :objects
+    Group.all.select { |g| g.custom_fields['display_on_staff'] == 't' }.each do |g|
+      has_many g.name.to_sym, serializer: UserNameSerializer, embed: :objects
+      has_one (g.name + "_name").to_sym, embed: :objects
+    end
   end
 end

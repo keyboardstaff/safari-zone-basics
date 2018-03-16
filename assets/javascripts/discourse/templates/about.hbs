@@ -29,7 +29,7 @@
               </span>
               {{group.full_name}}
             </h3>
-            {{#each model.send(:admins) as |u|}}
+            {{#each group.users as |u|}}
               {{user-info user=u}}
             {{/each}}
             <div class='clearfix'></div>
