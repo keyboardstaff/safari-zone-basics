@@ -6,6 +6,7 @@
 
 after_initialize do
   About.class_eval do
+    attr_accessor :developers
 
     # STAFF_GROUPS = [ # todo make this IDs
     #   "Higher_Staff",
@@ -30,6 +31,12 @@ after_initialize do
 
     def moderators
       @moderators = Group.find(44).users
+        .human_users
+        .order(:username_lower)
+    end
+
+    def developers
+      @developers = Group.find(47).users
         .human_users
         .order(:username_lower)
     end

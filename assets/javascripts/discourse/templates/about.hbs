@@ -44,6 +44,19 @@
         </section>
       {{/if}}
 
+      {{#if model.developers}}
+        <section class='about moderators'>
+          <h3>{{d-icon "code"}} {{i18n 'about.our_developers'}}</h3>
+
+          <div class='users'>
+            {{#each model.developers as |d|}}
+              {{user-info user=d}}
+            {{/each}}
+          </div>
+          <div class='clearfix'></div>
+        </section>
+      {{/if}}
+
       {{#if contactInfo}}
         <section class='about contact'>
             <h3>{{d-icon "envelope-o"}} {{i18n 'about.contact'}}</h3>
