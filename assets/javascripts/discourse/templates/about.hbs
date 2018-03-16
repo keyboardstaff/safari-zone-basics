@@ -22,8 +22,11 @@
       {{#if model.groups}}
         {{#each model.groups as |group|}}
           <section class='about {{group.name}}'>
-            <h3 style="color: #{{group.flair_bg_color}}">
+            <h3>
               <i class='fa {{group.flair_url}}'></i> {{group.full_name}}
+              <span style="font-style: italic; color: #{{group.flair_bg_color}}">
+                {{group.user_count}}
+              </span>
             </h3>
             {{#each group.users as |u|}}
               {{user-info user=u}}
