@@ -13,6 +13,8 @@ after_initialize do
     def groups
       @groups = Group.all.select do |group|
         group.custom_fields['display_on_staff'] == 't'
+      end.sort do |g1, g2| 
+        g1.custom_fields['staff_order'] <=> g2.custom_fields['staff_order']
       end
     end
   end
