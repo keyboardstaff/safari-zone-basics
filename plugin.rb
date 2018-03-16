@@ -6,7 +6,6 @@
 
 after_initialize do
   About.class_eval do
-    attr_accessor :groups
 
     STAFF_GROUPS = [ # todo make this IDs
       "Higher_Staff",
@@ -17,14 +16,11 @@ after_initialize do
       "Social_Birbs",
       "Zine_Staff"
     ]
-    def groups
-      @groups ||= STAFF_GROUPS.map do |group_name|
+    def moderators
+      STAFF_GROUPS.map do |group_name|
         Group.find_by(name: group_name)
       end
     end
-
-    def not_admins
-      User.where(admin: false, moderator: false)
-    end
+    
   end
 end
