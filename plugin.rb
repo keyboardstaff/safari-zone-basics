@@ -23,7 +23,7 @@ after_initialize do
       end
     end
 
-    def admins
+    def not_admins
       User.where(admin: false, moderator: false)
     end
   end
