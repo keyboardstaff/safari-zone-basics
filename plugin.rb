@@ -53,7 +53,7 @@ after_initialize do
     def find_group(id)
       Group.find(id).users
         .human_users
-        .order(:username_lowere)
+        .order(:username_lower)
     end
   end
 
