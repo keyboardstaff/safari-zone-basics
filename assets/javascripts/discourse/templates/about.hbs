@@ -19,17 +19,29 @@
         <p>{{model.description}}</p>
       </section>
 
+      {{#if model.admins}}
+        <section class='about admins'>
+          <h3>{{d-icon "users"}} {{i18n 'about.our_admins'}}</h3>
+
+          {{#each model.admins as |a|}}
+            {{user-info user=a}}
+          {{/each}}
+          <div class='clearfix'></div>
+
+        </section>
+      {{/if}}
+
       {{#if model.moderators}}
-        {{#each model.moderators as |group|}}
-          <section class='about moderators'>
-            <h3>{{d-icon "users"}} {{group.name}}</h3>
+        <section class='about moderators'>
+          <h3>{{d-icon "users"}} {{i18n 'about.our_moderators'}}</h3>
 
-            <div class='users'>
-
-            </div>
-            <div class='clearfix'></div>
-          </section>
-        {{/each}}
+          <div class='users'>
+            {{#each model.moderators as |m|}}
+              {{user-info user=m}}
+            {{/each}}
+          </div>
+          <div class='clearfix'></div>
+        </section>
       {{/if}}
 
       {{#if contactInfo}}
