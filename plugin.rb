@@ -72,39 +72,39 @@ after_initialize do
     end
   end
 
-  require_dependency 'current_user'
+  # require_dependency 'current_user'
 
-  class DevConstraint
+  # class DevConstraint
 
-    def initialize(options = {})
-      @require_master = options[:require_master]
-    end
+  #   def initialize(options = {})
+  #     @require_master = options[:require_master]
+  #   end
 
-    def matches?(request)
-      return false if @require_master && RailsMultisite::ConnectionManagement.current_db != "default"
-      provider = Discourse.current_user_provider.new(request.env)
-      provider.current_user &&
-        provider.current_user.admin? &&
-        custom_dev_check(request)
-    rescue Discourse::InvalidAccess
-      false
-    end
+  #   def matches?(request)
+  #     return false if @require_master && RailsMultisite::ConnectionManagement.current_db != "default"
+  #     provider = Discourse.current_user_provider.new(request.env)
+  #     provider.current_user &&
+  #       provider.current_user.admin? &&
+  #       custom_dev_check(request)
+  #   rescue Discourse::InvalidAccess
+  #     false
+  #   end
 
-    # Extensibility point: plugins can overwrite this to add additional checks
-    # if they require.
-    def custom_dev_check(request)
-      true
-    end
+  #   # Extensibility point: plugins can overwrite this to add additional checks
+  #   # if they require.
+  #   def custom_dev_check(request)
+  #     true
+  #   end
 
-  end
+  # end
 
-  Discourse::Application.routes.append do
-    get "customize" => "color_schemes#index", constraints: DevConstraint.new
-    get "customize/themes" => "themes#index", constraints: DevConstraint.new
-    get "customize/colors" => "color_schemes#index", constraints: DevConstraint.new
-    get "customize/colors/:id" => "color_schemes#index", constraints: DevConstraint.new
-    get "customize/permalinks" => "permalinks#index", constraints: DevConstraint.new
-    get "customize/embedding" => "embedding#show", constraints: DevConstraint.new
-    put "customize/embedding" => "embedding#update", constraints: DevConstraint.new
-  end
+  # Discourse::Application.routes.append do
+  #   get "customize" => "color_schemes#index", constraints: DevConstraint.new
+  #   get "customize/themes" => "themes#index", constraints: DevConstraint.new
+  #   get "customize/colors" => "color_schemes#index", constraints: DevConstraint.new
+  #   get "customize/colors/:id" => "color_schemes#index", constraints: DevConstraint.new
+  #   get "customize/permalinks" => "permalinks#index", constraints: DevConstraint.new
+  #   get "customize/embedding" => "embedding#show", constraints: DevConstraint.new
+  #   put "customize/embedding" => "embedding#update", constraints: DevConstraint.new
+  # end
 end
