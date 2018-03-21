@@ -65,7 +65,7 @@ after_initialize do
   AboutSerializer.class_eval do
     STAFF_GROUPS = [
       # exclude admins and mods bc they're already defined
-      :hstaff
+      :hstaff,
       :bss,
       :developers,
       :discord_staff,
