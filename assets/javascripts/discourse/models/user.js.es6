@@ -349,7 +349,8 @@ const User = RestModel.extend({
     const groups = this.get('groups') || [];
 
     return groups.filter(group => {
-      return !group.automatic || group.name === "moderators";
+      // return !group.automatic || group.name === "moderators";
+      return group.flair_bg_color;
     });
   },
 
