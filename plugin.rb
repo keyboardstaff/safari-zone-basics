@@ -11,6 +11,7 @@ after_initialize do
 
     STAFF_GROUPS = [
       # exclude admins and mods bc they're already defined
+      :hstaff,
       :bss,
       :developers,
       :discord_staff,
@@ -20,8 +21,12 @@ after_initialize do
 
     attr_accessor *STAFF_GROUPS
 
-    def admins # actually hstaff
-      @admins = find_group(55)
+    def hstaff
+      @hstaff = find_group(55)
+    end
+
+    def admins
+      @admins = find_group(41)
     end
 
     def moderators
@@ -60,6 +65,7 @@ after_initialize do
   AboutSerializer.class_eval do
     STAFF_GROUPS = [
       # exclude admins and mods bc they're already defined
+      :hstaff
       :bss,
       :developers,
       :discord_staff,

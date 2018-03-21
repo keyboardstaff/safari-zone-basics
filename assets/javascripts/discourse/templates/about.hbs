@@ -19,6 +19,18 @@
         <p>{{model.description}}</p>
       </section>
 
+      {{#if model.hstaff}}
+        <section class='about'>
+          <h3 style="font-style: italic">{{d-icon "star"}} {{i18n 'about.our_hstaff'}}</h3>
+
+          {{#each model.hstaff as |h|}}
+            {{user-info user=h}}
+          {{/each}}
+          <div class='clearfix'></div>
+
+        </section>
+      {{/if}}
+
       {{#if model.admins}}
         <section class='about'>
           <h3>{{d-icon "star"}} {{i18n 'about.our_admins'}}</h3>

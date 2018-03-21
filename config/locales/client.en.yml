@@ -1,6 +1,7 @@
 en:
   js:
     about:
+      our_hstaff: 'Higher Staff'
       our_bss: 'Battle Server Staff'
       our_developers: 'Developers'
       our_discord_staff: 'Discord Staff'
@@ -10,3 +11,6 @@ en:
       discord:
         title: 'Safari Zone Discord'
         description: 'Join in the chatting on our Discord server!'
+    user:
+      summary:
+        fields: 'Fields'
