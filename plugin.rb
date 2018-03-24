@@ -4,6 +4,7 @@
 # authors: Flower_Child
 # url: https://github.com/tipsypastels/safari-zone-basics
 
+register_asset "stylesheets/custom_mixins.scss"
 
 #@HACK clean this up and DRY up code
 after_initialize do
