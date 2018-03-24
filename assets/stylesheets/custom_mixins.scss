@@ -1,0 +1,23 @@
+@mixin color-df-footer($background: $primary, $text: $secondary) {
+  background-color: $background;
+
+  .df-top {
+    background-color: transparent;
+    
+    .df-cards {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    
+    p, i.fa.footer {
+      color: darken($secondary, 8%);
+    }
+  }
+
+  .df-bottom {
+    background-color: rgba(0, 0, 0, 0.1);
+    
+    a {
+      color: darken($secondary, 10%);
+    }
+  }
+}
