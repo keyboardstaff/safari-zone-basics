@@ -36,8 +36,8 @@ after_initialize do
       @bss = find_group(53)
     end
 
-    def developers
-      @developers = find_group(47)
+    def developers # and designers
+      @developers = (find_group(47) + find_group(57)).uniq
     end
 
     def discord_staff
