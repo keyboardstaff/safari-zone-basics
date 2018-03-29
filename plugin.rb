@@ -87,4 +87,5 @@ after_initialize do
         object.user.primary_group.full_name if object.user.primary_group
       end
     end
+  end
 end
