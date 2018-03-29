@@ -77,39 +77,14 @@ after_initialize do
     end
   end
 
-  # require_dependency 'current_user'
+  PostSerializer.class_eval do
+    def primary_group_name
+      return nil unless object.user && object.user.primary_group_id
 
-  # class DevConstraint
-
-  #   def initialize(options = {})
-  #     @require_master = options[:require_master]
-  #   end
-
-  #   def matches?(request)
-  #     return false if @require_master && RailsMultisite::ConnectionManagement.current_db != "default"
-  #     provider = Discourse.current_user_provider.new(request.env)
-  #     provider.current_user &&
-  #       provider.current_user.admin? &&
-  #       custom_dev_check(request)
-  #   rescue Discourse::InvalidAccess
-  #     false
-  #   end
-
-  #   # Extensibility point: plugins can overwrite this to add additional checks
-  #   # if they require.
-  #   def custom_dev_check(request)
-  #     true
-  #   end
-
-  # end
-
-  # Discourse::Application.routes.append do
-  #   get "customize" => "color_schemes#index", constraints: DevConstraint.new
-  #   get "customize/themes" => "themes#index", constraints: DevConstraint.new
-  #   get "customize/colors" => "color_schemes#index", constraints: DevConstraint.new
-  #   get "customize/colors/:id" => "color_schemes#index", constraints: DevConstraint.new
-  #   get "customize/permalinks" => "permalinks#index", constraints: DevConstraint.new
-  #   get "customize/embedding" => "embedding#show", constraints: DevConstraint.new
-  #   put "customize/embedding" => "embedding#update", constraints: DevConstraint.new
-  # end
+      if @topic_view
+        @topic_view.primary_group_names[object.user.primary_group_id]
+      else
+        object.user.primary_group.full_name if object.user.primary_group
+      end
+    end
 end
