@@ -4,8 +4,8 @@ export default {
   name: 'safari-zone-basics',
   initialize: function() {
     UserBadges.reopen({
-      sortedBadgesWithoutAdoptables: Ember.computed.filter('model', b => b.badge_grouping_id !== 9),
-      sortedAdoptables: Ember.computed.filter('model', b => b.badge_grouping_id === 9)
+      sortedBadgesWithoutAdoptables: Ember.computed.filter('model', b => b.name !== "Bellossom"),
+      sortedAdoptables: Ember.computed.filter('model', b => b.name === "Bellossom")
     });
   }
 };
