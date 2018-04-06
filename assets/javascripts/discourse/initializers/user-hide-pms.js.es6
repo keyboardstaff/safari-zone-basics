@@ -4,9 +4,10 @@ export default {
   name: 'safarizone-basics-users-hide-pms',
   initialize: function() {
     User.reopen({
-      showPrivateMessages(viewingSelf) {
-        return this.siteSettings.enable_personal_messages && viewingSelf;
-      }
+      /* doesn't work. can't override existing function? */
+      // showPrivateMessages(viewingSelf) {
+      //   return this.siteSettings.enable_personal_messages && viewingSelf;
+      // }
     });
   }
 };
