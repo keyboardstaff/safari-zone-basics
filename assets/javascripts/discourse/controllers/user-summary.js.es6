@@ -24,18 +24,5 @@ export default Ember.Controller.extend({
   @computed('model.recent_time_read')
   recentTimeRead(recentTimeReadSeconds) {
     return recentTimeReadSeconds > 0 ? durationTiny(recentTimeReadSeconds) : null;
-  },
-
-  @computed('model.user_fields.@each.value')
-  publicUserFields() {
-    const siteUserFields = this.site.get('user_fields');
-    if (!Ember.isEmpty(siteUserFields)) {
-      const userFields = this.get('model.user_fields');
-      return siteUserFields.filterBy('show_on_profile', true).sortBy('position').map(field => {
-        Ember.set(field, 'dasherized_name', field.get('name').dasherize());
-        const value = userFields ? userFields[field.get('id').toString()] : null;
-        return Ember.isEmpty(value) ? null : Ember.Object.create({ value, field });
-      }).compact();
-    }
   }
 });
