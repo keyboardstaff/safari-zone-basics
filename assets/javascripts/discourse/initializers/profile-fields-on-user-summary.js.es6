@@ -12,11 +12,12 @@ export default {
         return topicCount + postCount;
       },
 
-      @computed('model.days_visited')
-      averagePostsPerDay: function(daysVisited) {
-        var postCount = totalPostCount();
-        if (daysVisited == 0) return totalPostCount();
-        return totalPostCount() / daysVisited;
+      // unnecessary duplication, should call totalPostCount() when you figure out how
+      @computed('model.days_visited', 'model.topic_count', 'model.post_count')
+      averagePostsPerDay: function(daysVisited, topicCount, postCount) {
+        var totalPostCount = topicCount + postCount;
+        if (daysVisited == 0) return postCount;
+        return postCount / daysVisited;
       }
     });
   }
