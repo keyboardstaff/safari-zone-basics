@@ -2,7 +2,7 @@ en:
   js:
     user:
       summary:
-        post_count:
+        total_post_count:
           one: 'total post created'
           other: 'total posts created'
     about:
