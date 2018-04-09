@@ -22,3 +22,6 @@ en:
         total_post_count:
           one: 'total post created'
           other: 'total posts created'
+        posts_per_day:
+          one: 'post per day'
+          other: 'posts per day'
