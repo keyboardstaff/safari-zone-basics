@@ -1,5 +1,10 @@
 en:
   js:
+    user:
+      summary:
+        post_count:
+          one: 'total post created'
+          other: 'total posts created'
     about:
       our_hstaff: 'Higher Staff'
       our_bss: 'Battle Server Staff'
