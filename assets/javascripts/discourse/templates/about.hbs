@@ -19,6 +19,11 @@
         <p>{{model.description}}</p>
       </section>
 
+      <section class='about staff-list-description'>
+        <h2>{{i18n 'about.staff_list.title'}}</h2>
+        <p>A full index of staff groups can be found {{#link-to 'groups'}}here{{/link-to}}.</p>
+      </section>
+
       {{#if model.hstaff}}
         <section class='about'>
           <h3 style="font-style: italic">{{d-icon "star"}} {{i18n 'about.our_hstaff'}}</h3>

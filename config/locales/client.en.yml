@@ -7,6 +7,8 @@ en:
       our_discord_staff: 'Discord Staff'
       our_social_media: 'Social Media Team'
       our_zine_staff: 'Zine Staff'
+      staff_list:
+        title: 'Safari Zone Staff'
     pseudo_categories:
       discord:
         title: 'Safari Zone Discord'
