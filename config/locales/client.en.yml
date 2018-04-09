@@ -1,10 +1,5 @@
 en:
-  js:
-    user:
-      summary:
-        total_post_count:
-          one: 'total post created'
-          other: 'total posts created'
+  js:   
     about:
       our_hstaff: 'Higher Staff'
       our_bss: 'Battle Server Staff'
@@ -22,3 +17,6 @@ en:
     user:
       summary:
         fields: 'Fields'
+        total_post_count:
+          one: 'total post created'
+          other: 'total posts created'
