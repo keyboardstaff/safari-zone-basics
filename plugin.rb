@@ -8,7 +8,7 @@
 after_initialize do
   About.class_eval do
 
-    STAFF_GROUPS = [
+    STAFF_GROUPS ||= [
       # exclude admins and mods bc they're already defined
       :hstaff,
       :bss,
@@ -62,7 +62,7 @@ after_initialize do
   end
 
   AboutSerializer.class_eval do
-    STAFF_GROUPS = [
+    STAFF_GROUPS ||= [
       # exclude admins and mods bc they're already defined
       :hstaff,
       :bss,
