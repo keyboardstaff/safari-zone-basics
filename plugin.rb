@@ -77,6 +77,7 @@ after_initialize do
     end
   end
 
+  require_dependency 'topic_query'
   TopicQuery.class_eval do
     def list_category_topic_ids(category)
       query = default_results(category: category.id)
