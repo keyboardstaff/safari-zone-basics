@@ -80,9 +80,9 @@ after_initialize do
   TopicQuery.class_eval do
     def list_category_topic_ids(category)
       query = default_results(category: category.id)
-      pinned_ids = query.where('pinned_at IS NOT NULL AND category_id = ?', category.id)
+      pinned_ids = query.where('pinned_at IS NOT NULL AND category_id <> ?', category.id)
                         .order('pinned_at DESC').pluck(:id)
-      non_pinned_ids = query.where('pinned_at IS NULL OR category_id = ?', category.id).pluck(:id)
+      non_pinned_ids = query.where('pinned_at IS NULL AND category_id <> ?', category.id).pluck(:id)
 
       (pinned_ids + non_pinned_ids)[0...@options[:per_page]]
     end
