@@ -77,14 +77,14 @@ after_initialize do
     end
   end
 
-  require_dependency 'topic_query'
-  TopicQuery.class_eval do
-    def list_category_topic_ids(category)
-      query = default_results(category: category.id)
-      pinned_ids = query.where('topics.pinned_at IS NOT NULL AND topics.category_id = ?', category.id).limit(nil).order('pinned_at DESC').pluck(:id)
-      non_pinned_ids = query.where('topics.pinned_at IS NULL OR topics.category_id <> ?', category.id).pluck(:id)
+  # require_dependency 'topic_query'
+  # TopicQuery.class_eval do
+  #   def list_category_topic_ids(category)
+  #     query = default_results(category: category.id)
+  #     pinned_ids = query.where('topics.pinned_at IS NOT NULL AND topics.category_id = ?', category.id).limit(nil).order('pinned_at DESC').pluck(:id)
+  #     non_pinned_ids = query.where('topics.pinned_at IS NULL OR topics.category_id <> ?', category.id).pluck(:id)
 
-      (pinned_ids + non_pinned_ids)[0...@options[:per_page]]
-    end
-  end
+  #     (pinned_ids + non_pinned_ids)[0...@options[:per_page]]
+  #   end
+  # end
 end
