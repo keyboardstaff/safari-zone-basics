@@ -83,7 +83,11 @@ after_initialize do
         canonical_url "#{Discourse.base_url_no_prefix}#{@category.url}"
         self.send(filter, category: @category.id, no_subcategories: true)
       end
-    end
 
+      define_method("parent_category_category_#{filter}") do
+         canonical_url "#{Discourse.base_url_no_prefix}#{@category.url}"
+         self.send(filter, category: @category.id, no_subcategories: true)
+       end
+    end
   end
 end
