@@ -9,13 +9,6 @@ en:
       our_zine_staff: 'Zine Staff'
       staff_list:
         title: 'Safari Zone Staff'
-    pseudo_categories:
-      discord:
-        title: 'Safari Zone Discord'
-        description: 'Join in the chatting on our Discord server!'
-      ps:
-        title: 'Safari Zone Battle Server'
-        description: 'Want to challenge your friends? Join the Showdown server!'
     user:
       summary:
         fields: 'Fields'
