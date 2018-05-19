@@ -6,6 +6,13 @@
 
 #@HACK clean this up and DRY up code
 after_initialize do
+  TopicListItemSerializer.class_eval do
+    def first_poster_username
+      posters.first.try(:user).try(:username)
+    end
+
+    attributes :first_poster_username
+  end
   About.class_eval do
 
     STAFF_GROUPS ||= [
