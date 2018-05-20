@@ -9,6 +9,14 @@ after_initialize do
   Group.register_custom_field_type('full_leader_name', :string)
   Group.register_custom_field_type('full_plural_name', :string)
 
+  add_to_serializer(:basic_group, :full_leader_name) do
+    object.custom_fields['full_leader_name']
+  end
+
+  add_to_serializer(:basic_group, :full_plural_name) do
+    object.custom_fields['full_plural_name']
+  end
+
   Category.class_eval do
     attr_accessor :subcategory_slugs
   end
