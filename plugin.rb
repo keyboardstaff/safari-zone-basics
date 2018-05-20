@@ -6,6 +6,8 @@
 
 #@HACK clean this up and DRY up code
 after_initialize do
+  Group.register_custom_field_type('full_leader_name', :string)
+  Group.register_custom_field_type('full_plural_name', :string)
 
   Category.class_eval do
     attr_accessor :subcategory_slugs

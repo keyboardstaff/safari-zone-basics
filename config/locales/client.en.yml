@@ -18,3 +18,7 @@ en:
         posts_per_day:
           one: 'post per day'
           other: 'posts per day'
+    groups:
+      manage:
+        full_leader_name: 'Leader Name'
+        full_plural_name: 'Plural Name'
