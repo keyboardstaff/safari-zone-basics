@@ -22,3 +22,5 @@ en:
       manage:
         full_leader_name: 'Leader Name'
         full_plural_name: 'Plural Name'
+    categories:
+      ago: 'ago'
