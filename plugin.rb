@@ -17,6 +17,12 @@ after_initialize do
     object.custom_fields['full_plural_name']
   end
 
+  BasicCategorySerializer.class_eval do
+    def notification_level_is_max
+      object.notification_level == 3
+    end
+  end
+
   Category.class_eval do
     attr_accessor :subcategory_slugs
   end
