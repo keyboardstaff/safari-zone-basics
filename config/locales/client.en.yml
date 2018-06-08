@@ -23,4 +23,4 @@ en:
         full_leader_name: 'Leader Name'
         full_plural_name: 'Plural Name'
     categories:
-      ago: 'ago'
+      latest_ago: 'ago'
