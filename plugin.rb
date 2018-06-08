@@ -19,7 +19,7 @@ after_initialize do
 
   BasicCategorySerializer.class_eval do
     def notification_level_is_max
-      object.notification_level == '3'
+      object.notification_level.to_s == '3'
     end
   end
 
