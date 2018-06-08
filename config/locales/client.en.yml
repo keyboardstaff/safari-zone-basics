@@ -24,3 +24,5 @@ en:
         full_plural_name: 'Plural Name'
     categories:
       latest_ago: 'ago'
+    topic:
+      create_new_layout: 'Start a new discussion...'
