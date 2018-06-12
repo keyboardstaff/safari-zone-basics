@@ -6,15 +6,10 @@
 
 #@HACK clean this up and DRY up code
 after_initialize do
-  Group.register_custom_field_type('full_leader_name', :string)
-  Group.register_custom_field_type('full_plural_name', :string)
+  User.register_custom_field_type('has_hstaff_star', :boolean)
 
-  add_to_serializer(:basic_group, :full_leader_name) do
-    object.custom_fields['full_leader_name']
-  end
-
-  add_to_serializer(:basic_group, :full_plural_name) do
-    object.custom_fields['full_plural_name']
+  add_to_serializer(:user, :has_hstaff_star) do
+    object.custom_fields['has_hstaff_star']
   end
 
   BasicCategorySerializer.class_eval do
