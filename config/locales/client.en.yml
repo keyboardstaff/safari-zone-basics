@@ -18,7 +18,6 @@ en:
         posts_per_day:
           one: 'post per day'
           other: 'posts per day'
-      has_hstaff_star: 'Has HStaff Star'
     groups:
       manage:
         full_leader_name: 'Leader Name'

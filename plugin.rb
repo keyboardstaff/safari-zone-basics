@@ -6,12 +6,6 @@
 
 #@HACK clean this up and DRY up code
 after_initialize do
-  User.register_custom_field_type('has_hstaff_star', :boolean)
-
-  add_to_serializer(:user, :has_hstaff_star) do
-    object.custom_fields['has_hstaff_star']
-  end
-
   BasicCategorySerializer.class_eval do
     attributes :notification_level_is_watching,
                :notification_level_is_tracking
