@@ -24,5 +24,7 @@ en:
         full_plural_name: 'Plural Name'
     categories:
       latest_ago: 'ago'
+      show_all: 'Show All Categories'
+      show_fav: 'Show Your Favourite Categories'
     topic:
       create_new_layout: 'Start a new discussion...'

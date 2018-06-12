@@ -18,10 +18,10 @@ after_initialize do
   end
 
   BasicCategorySerializer.class_eval do
-    attributes :notification_level_is_max
+    attributes :notification_level_is_fav
 
-    def notification_level_is_max
-      object.notification_level == 3
+    def notification_level_is_fav
+      object.notification_level >= 2
     end
   end
 
