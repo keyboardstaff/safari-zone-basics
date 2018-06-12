@@ -18,9 +18,14 @@ after_initialize do
   end
 
   BasicCategorySerializer.class_eval do
-    attributes :notification_level_is_fav
+    attributes :notification_level_is_watching,
+               :notification_level_is_tracking
 
-    def notification_level_is_fav
+    def notification_level_is_watching
+      object.notification_level >= 3
+    end
+
+    def notification_level_is_tracking
       object.notification_level >= 2
     end
   end
