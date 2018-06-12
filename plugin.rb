@@ -21,6 +21,10 @@ after_initialize do
     def notification_level_is_max
       object.notification_level == 3
     end
+
+    def test
+      "test!"
+    end
   end
 
   Category.class_eval do
