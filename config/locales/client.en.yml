@@ -28,3 +28,4 @@ en:
       show_fav: 'Show Your Favourite Categories'
     topic:
       create_new_layout: 'Start a new discussion...'
+      created_by: 'Created by {{user}}'
