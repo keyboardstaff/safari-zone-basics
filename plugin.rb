@@ -6,6 +6,14 @@
 
 #@HACK clean this up and DRY up code
 after_initialize do
+  add_to_class(:guardian, :allow_theme?) do |theme_key|
+    return true if Theme.user_theme_keys.include?(theme_key)
+    return false if not Theme.theme_keys.include?(theme_key)
+
+    # can_hotlink_user_theme? Theme.find_by(key: theme_key)
+    is_staff?
+  end
+  
   BasicCategorySerializer.class_eval do
     attributes :notification_level_is_watching,
                :notification_level_is_tracking
