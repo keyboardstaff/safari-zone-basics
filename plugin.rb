@@ -22,6 +22,10 @@ after_initialize do
       object.notification_level >= 3
     end
 
+    def notification_level_is_muted
+      object.notification_level == 0
+    end
+
     def notification_level_is_tracking
       object.notification_level >= 2
     end
