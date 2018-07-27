@@ -115,9 +115,20 @@ after_initialize do
     end
   end
 
-  [BasicTopicSerializer,
-   TopicListItemSerializer].each do |ser|
-    ser.class_eval do
+  TopicListItemSerializer.class_eval do
+    def first_poster_username
+      posters.first.try(:user).try(:username)
+    end
+
+    def category_name
+      object&.category&.name
+    end
+
+    attributes :first_poster_username,
+               :category_name
+  end
+
+  BasicTopicSerializer.class_eval do
       def first_poster_username
         posters.first.try(:user).try(:username)
       end
@@ -126,10 +137,12 @@ after_initialize do
         object&.category&.name
       end
 
-      attributes :first_poster_username,
-                 :category_name
+      def posters
+        object.posters || []
+      end
+
+      attributes :first_poster_username, :category_name
     end
-  end
 
   About.class_eval do
 
