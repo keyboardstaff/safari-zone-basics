@@ -22,10 +22,6 @@ after_initialize do
       object.notification_level >= 3
     end
 
-    def notification_level_is_muted
-      object.notification_level == 0
-    end
-
     def notification_level_is_tracking
       object.notification_level >= 2
     end
@@ -119,17 +115,20 @@ after_initialize do
     end
   end
 
-  TopicListItemSerializer.class_eval do
-    def first_poster_username
-      posters.first.try(:user).try(:username)
-    end
+  [BasicTopicSerializer,
+   TopicListItemSerializer].each do |ser|
+    ser.class_eval do
+      def first_poster_username
+        posters.first.try(:user).try(:username)
+      end
 
-    def category_name
-      object&.category&.name
-    end
+      def category_name
+        object&.category&.name
+      end
 
-    attributes :first_poster_username,
-               :category_name
+      attributes :first_poster_username,
+                 :category_name
+    end
   end
 
   About.class_eval do
