@@ -18,6 +18,7 @@ en:
         posts_per_day:
           one: 'post per day'
           other: 'posts per day'
+      switch_theme: 'Switch Theme'
     groups:
       manage:
         full_leader_name: 'Leader Name'
